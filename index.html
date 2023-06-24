@@ -77,6 +77,15 @@
     opacity: 0.2;
     color: black;
     font-weight: normal;
+
+   table {
+      border-collapse: collapse;
+    }
+    table, th, td {
+      border: 1px solid black;
+      padding: 5px;
+      font-size: 3rem;
+    }
 }
 
 
@@ -155,8 +164,7 @@
   </table>
 
   <script>
-   
-    function izracunajPlatu() {
+  function izracunajPlatu() {
   // Dobijanje vrednosti unetih podataka
   var osnovica = parseFloat(document.getElementById("osnovica").value);
   var koeficijent = parseFloat(document.getElementById("koeficijent").value);
