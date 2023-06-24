@@ -108,47 +108,47 @@
 
       <div class="form-group">
         <label for="text">% minulog rada:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="minuli-rad"  placeholder="npr. 4,8">
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="minulirad"  placeholder="npr. 4,8">
       </div>
      
       <div class="form-group">
         <label for="text">Lični odbitak:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="licni-odbitak"  placeholder="npr. 4,8">
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="licniodbitak"  placeholder="npr. 4,8">
       </div>
 
       <div class="form-group">
         <label for="text">Ukupno radnih sati:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="broj-sati"  placeholder="npr. 176" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="brojsati"  placeholder="npr. 176" required>
       </div>
 
       <div class="form-group">
         <label for="text">Broj sati na redovnom radu:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="redovan-rad"  placeholder="" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="redovanrad"  placeholder="" required>
       </div>
 
       <div class="form-group">
         <label for="text">Broj sati na noćnom radu:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="nocni-rad"  placeholder="">
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="nocnirad"  placeholder="">
       </div>
 
       <div class="form-group">
         <label for="text">Broj sati na radu za praznik:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="rad-za-praznike"  placeholder="">
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="radzapraznike"  placeholder="">
       </div>
 
       <div class="form-group">
         <label for="text">Plaćeno odsustvo (godišnji odmor, vjerski praznik...):</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="placeno-odsustvo"  placeholder="">
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="placenoodsustvo"  placeholder="">
       </div>
 
       <div class="form-group">
         <label for="text">Bolovanje do 30 dana:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="bolovanje-do-30"  placeholder="">
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="bolovanjedo30"  placeholder="">
       </div>
 
       <div class="form-group">
         <label for="text">Bolovanje preko 30 dana:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="bolovanje-preko-30"  placeholder="">
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="bolovanjepreko30"  placeholder="">
       </div>
 
     
@@ -168,15 +168,15 @@
   // Dobijanje vrednosti unetih podataka
   var osnovica = parseFloat(document.getElementById("osnovica").value);
   var koeficijent = parseFloat(document.getElementById("koeficijent").value);
-  var minuliRad = parseFloat(document.getElementById("minuli-rad").value);
-  var licniOdbitak = parseFloat(document.getElementById("licni-odbitak").value);
-  var brojSati = parseFloat(document.getElementById("broj-sati").value);
-  var redovanRad = parseFloat(document.getElementById("redovan-rad").value);
-  var nocniRad = parseFloat(document.getElementById("nocni-rad").value);
-  var radZaPraznike = parseFloat(document.getElementById("rad-za-praznike").value);
-  var placenoOdsustvo = parseFloat(document.getElementById("placeno-odsustvo").value);
-  var bolovanjeDo30 = parseFloat(document.getElementById("bolovanje-do-30").value);
-  var bolovanjePreko30 = parseFloat(document.getElementById("bolovanje-preko-30").value);
+  var minuliRad = parseFloat(document.getElementById("minulirad").value);
+  var licniOdbitak = parseFloat(document.getElementById("licniodbitak").value);
+  var brojSati = parseFloat(document.getElementById("brojsati").value);
+  var redovanRad = parseFloat(document.getElementById("redovanrad").value);
+  var nocniRad = parseFloat(document.getElementById("nocnirad").value);
+  var radZaPraznike = parseFloat(document.getElementById("radzapraznike").value);
+  var placenoOdsustvo = parseFloat(document.getElementById("placenoodsustvo").value);
+  var bolovanjeDo30 = parseFloat(document.getElementById("bolovanjedo30").value);
+  var bolovanjePreko30 = parseFloat(document.getElementById("bolovanjepreko30").value);
 
   // Provera da li suma broja sati odgovara unetim vrednostima
   // var sumaSati = redovanRad + nocniRad + radZaPraznike + placenoOdsustvo + bolovanjeDo30 + bolovanjePreko30;
