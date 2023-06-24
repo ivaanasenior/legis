@@ -199,27 +199,15 @@
   </table>
 
   <script>
-    function toggleAdditionalFields() {
-      var additionalFields = document.getElementById("additionalFields");
-      var detailButton = document.querySelector("button:nth-of-type(1)");
-      if (additionalFields.style.display === "none") {
-        additionalFields.style.display = "block";
-        detailButton.style.display = "none";
-      } else {
-        additionalFields.style.display = "none";
-        detailButton.style.display = "block";
-      }
-    }
+   
     
     function calculateSalary() {
       var osnovica = parseFloat(document.getElementById("osnovica").value);
       var koeficijent = parseFloat(document.getElementById("koeficijent").value);
       var minuliRad = parseFloat(document.getElementById("minuli-rad").value);
-    
       var licniOdbitak = parseFloat(document.getElementById("licni-odbitak").value);
       var brojSati = parseFloat(document.getElementById("broj-sati").value);
-      
-      var redovanRad = parseFloat(document.getElementById("redovan-radd").value) || 0;
+      var redovanRad = parseFloat(document.getElementById("redovan-rad").value) || 0;
       var nocniRad = parseFloat(document.getElementById("nocni-rad").value) || 0;
       var radZaPraznike = parseFloat(document.getElementById("rad-za-praznike").value) || 0;
       var placenoOdsustvo = parseFloat(document.getElementById("placeno-odsustvo").value) || 0;
