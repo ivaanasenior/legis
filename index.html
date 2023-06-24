@@ -98,60 +98,60 @@
   <div class="container">
     <h1>Kalkulator plate</h1>
 
-    <form>
+    <form id="salary-form">
       <div class="form-group">
         <label for="text">Osnovica:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="osnovica" name="number1" placeholder="npr. 100,00" required> 
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="osnovica" placeholder="npr. 100,00" required> 
       </div>
 
       <div class="form-group">
         <label for="text">Koeficijent:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="koeficijent" name="number2" placeholder="npr. 15" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="koeficijent"  placeholder="npr. 15" required>
       </div>
 
       <div class="form-group">
         <label for="text">% minulog rada:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="stopa-minulog-rada" name="number3" placeholder="npr. 4,8" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="minuli-rad"  placeholder="npr. 4,8" required>
       </div>
      
       <div class="form-group">
         <label for="text">Lični odbitak:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="stopa-minulog-rada" name="number3" placeholder="npr. 4,8" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="licni-odbitak"  placeholder="npr. 4,8" required>
       </div>
 
       <div class="form-group">
         <label for="text">Ukupno radnih sati:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="ukupno-radnih-sati" name="number3" placeholder="npr. 176" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="broj-sati"  placeholder="npr. 176" required>
       </div>
 
       <div class="form-group">
         <label for="text">Broj sati na redovnom radu:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="redovan-rad" name="number3" placeholder="" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="redovan-rad"  placeholder="" required>
       </div>
 
       <div class="form-group">
         <label for="text">Broj sati na noćnom radu:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="nocni-rad" name="number3" placeholder="" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="nocni-rad"  placeholder="" required>
       </div>
 
       <div class="form-group">
         <label for="text">Broj sati na radu za praznik:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="rad-za-praznik" name="number3" placeholder="" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="rad-za-praznike"  placeholder="" required>
       </div>
 
       <div class="form-group">
         <label for="text">Plaćeno odsustvo (godišnji odmor, vjerski praznik...):</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="placeno-odsustvo" name="number3" placeholder="" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="placeno-odsustvo"  placeholder="" required>
       </div>
 
       <div class="form-group">
         <label for="text">Bolovanje do 30 dana:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="bol-do-30-dana" name="number3" placeholder="" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="bolovanje-do-30"  placeholder="" required>
       </div>
 
       <div class="form-group">
         <label for="text">Bolovanje preko 30 dana:</label>
-        <input type="text" pattern="[0-9]*" inputmode="numeric" id="bol-preko-30-dana" name="number3" placeholder="" required>
+        <input type="text" pattern="[0-9]*" inputmode="numeric" id="bolovanje-preko-30"  placeholder="" required>
       </div>
 
       
@@ -159,5 +159,58 @@
       <button type="submit">Izračunaj</button>
     </form>
   </div>
+  <script>
+    document.getElementById('salary-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Unos podataka
+      var osnovica = parseFloat(document.getElementById('osnovica').value);
+      var koeficijent = parseFloat(document.getElementById('koeficijent').value);
+      var minuliRad = parseFloat(document.getElementById('minuli-rad').value);
+      var poreskoOslobodjenje = parseFloat(document.getElementById('poresko-oslobodjenje').value);
+      var licniOdbitak = parseFloat(document.getElementById('licni-odbitak').value);
+      var brojSati = parseFloat(document.getElementById('broj-sati').value);
+      var redovanRad = parseFloat(document.getElementById('redovan-rad').value);
+      var nocniRad = parseFloat(document.getElementById('nocni-rad').value);
+      var radZaPraznike = parseFloat(document.getElementById('rad-za-praznike').value);
+      var placenoOdsustvo = parseFloat(document.getElementById('placeno-odsustvo').value);
+      var bolovanjeDo30 = parseFloat(document.getElementById('bolovanje-do-30').value);
+      var bolovanjePreko30 = parseFloat(document.getElementById('bolovanje-preko-30').value);
+
+      // Izračunavanje podataka
+      var osnovnaBrutoPlata = koeficijent * osnovica;
+      var radniStaz = osnovnaBrutoPlata * minuliRad;
+      var cijenaRadnogSata = osnovnaBrutoPlata / brojSati;
+      var iznosRedovnogRada = (redovanRad + placenoOdsustvo) * cijenaRadnogSata;
+      var iznosNocnogRada = nocniRad * cijenaRadnogSata * 1.35;
+      var iznosPraznicnogRada = radZaPraznike * cijenaRadnogSata * 1.5;
+      var iznosBolovanjaDo30 = bolovanjeDo30 * cijenaRadnogSata * 0.8;
+      var iznosBolovanjaPreko30 = bolovanjePreko30 * cijenaRadnogSata * 0.85;
+      var brutoPlata = iznosRedovnogRada + iznosNocnogRada + iznosPraznicnogRada + iznosBolovanjaDo30 + iznosBolovanjaPreko30 + radniStaz;
+      var ukupniDoprinosi = osnovnaBrutoPlata * 0.31;
+      var ukupniPorez = (brutoPlata - poreskoOslobodjenje - licniOdbitak) * 0.08;
+      var netoPlata = brutoPlata - ukupniDoprinosi - ukupniPorez;
+
+      // Ispis rezultata u tabeli
+      var table = document.getElementById('result-table');
+      var row = table.insertRow();
+
+      row.insertCell().textContent = osnovnaBrutoPlata.toFixed(2);
+      row.insertCell().textContent = radniStaz.toFixed(2);
+      row.insertCell().textContent = cijenaRadnogSata.toFixed(2);
+      row.insertCell().textContent = iznosRedovnogRada.toFixed(2);
+      row.insertCell().textContent = iznosNocnogRada.toFixed(2);
+      row.insertCell().textContent = iznosPraznicnogRada.toFixed(2);
+      row.insertCell().textContent = iznosBolovanjaDo30.toFixed(2);
+      row.insertCell().textContent = iznosBolovanjaPreko30.toFixed(2);
+      row.insertCell().textContent = brutoPlata.toFixed(2);
+      row.insertCell().textContent = ukupniDoprinosi.toFixed(2);
+      row.insertCell().textContent = ukupniPorez.toFixed(2);
+      row.insertCell().textContent = netoPlata.toFixed(2);
+
+      // Resetovanje forme
+      document.getElementById('salary-form').reset();
+    });
+  </script>
 </body>
 </html>
