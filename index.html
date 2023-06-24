@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     body {
-      font-size: 64px; /* Duplo veća veličina fonta */
+      font-size: 64px;
       font-family: Arial, sans-serif;
       background-color: #1f1f1f;
       color: #fff;
@@ -14,7 +14,7 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 10px; /* Promijenjen padding na 10px */
     }
 
     .header {
@@ -24,7 +24,7 @@
     }
 
     .header-icon {
-      font-size: 160px; /* Duplo veća veličina ikonice */
+      font-size: 160px;
       margin-left: auto;
       color: #fff;
       cursor: pointer;
@@ -66,6 +66,10 @@
       display: block;
     }
 
+    .header:hover .header-icon {
+      font-size: 112px; /* Smanjena veličina ikonice na 70% */
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -82,14 +86,15 @@
 
     th:first-child,
     td:first-child {
-      width: 70%; /* Prva kolona širine 70% */
+      width: 70%;
     }
 
     th:nth-child(2),
     td:nth-child(2),
     th:nth-child(3),
     td:nth-child(3) {
-      width: 15%; /* Druge dvije kolone širine 15% */
+      width: 15%;
+      font-size: 44px; /* Smanjena veličina fonta u drugoj i trećoj koloni na 70% */
     }
 
     th {
@@ -104,7 +109,7 @@
     }
 
     .document-group-title {
-      font-size: 80px; /* Duplo veća veličina fonta */
+      font-size: 80px;
       font-weight: bold;
       margin-bottom: 20px;
       color: #ffcc00;
@@ -121,7 +126,7 @@
     }
 
     .document-list-item a {
-      color: #f9f9f9; /* Promjena boje linka */
+      color: #f9f9f9;
       text-decoration: none;
     }
 
@@ -132,7 +137,6 @@
       text-decoration: none;
     }
 
-    /* Uklanja stilizaciju za webkit linkove */
     a:-webkit-any-link {
       color: inherit;
       cursor: auto;
