@@ -147,81 +147,135 @@
  <input type="submit" value="Izračunaj">
 </form>
 
-  <table id="result-table">
+ <table id="salaryTable" style="display: none;">
     <tr>
       <th>Osnovna bruto plata</th>
+      <td id="osnovnaBrutoPlataResult"></td>
+    </tr>
+    <tr>
       <th>Radni staž</th>
+      <td id="radniStazResult"></td>
+    </tr>
+    <tr>
       <th>Cijena radnog sata</th>
+      <td id="cijenaRadnogSataResult"></td>
+    </tr>
+    <tr>
       <th>Iznos redovnog rada</th>
+      <td id="iznosRedovnogRadaResult"></td>
+    </tr>
+    <tr>
       <th>Iznos noćnog rada</th>
+      <td id="iznosNocnogRadaResult"></td>
+    </tr>
+    <tr>
       <th>Iznos prazničnog rada</th>
+      <td id="iznosPraznicnogRadaResult"></td>
+    </tr>
+    <tr>
       <th>Iznos bolovanja do 30 dana</th>
+      <td id="iznosBolovanjaDo30Result"></td>
+    </tr>
+    <tr>
       <th>Iznos bolovanja preko 30 dana</th>
+      <td id="iznosBolovanjaPreko30Result"></td>
+    </tr>
+    <tr>
       <th>Bruto plata</th>
+      <td id="brutoPlataResult"></td>
+    </tr>
+    <tr>
       <th>Ukupni doprinosi</th>
+      <td id="ukupniDoprinosiResult"></td>
+    </tr>
+    <tr>
       <th>Ukupni porez</th>
+      <td id="ukupniPorezResult"></td>
+    </tr>
+    <tr>
       <th>Neto plata</th>
+      <td id="netoPlataResult"></td>
     </tr>
   </table>
 
-
-
-
-      
- 
-  </div>
   <script>
-    document.getElementById('salary-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      // Unos podataka
-      var osnovica = parseFloat(document.getElementById('osnovica').value);
-      var koeficijent = parseFloat(document.getElementById('koeficijent').value);
-      var minuliRad = parseFloat(document.getElementById('minuli-rad').value);
-      var poreskoOslobodjenje = parseFloat(document.getElementById('poresko-oslobodjenje').value);
-      var licniOdbitak = parseFloat(document.getElementById('licni-odbitak').value);
-      var brojSati = parseFloat(document.getElementById('broj-sati').value);
-      var redovanRad = parseFloat(document.getElementById('redovan-rad').value);
-      var nocniRad = parseFloat(document.getElementById('nocni-rad').value);
-      var radZaPraznike = parseFloat(document.getElementById('rad-za-praznike').value);
-      var placenoOdsustvo = parseFloat(document.getElementById('placeno-odsustvo').value);
-      var bolovanjeDo30 = parseFloat(document.getElementById('bolovanje-do-30').value);
-      var bolovanjePreko30 = parseFloat(document.getElementById('bolovanje-preko-30').value);
-
-      // Izračunavanje podataka
+    function toggleAdditionalFields() {
+      var additionalFields = document.getElementById("additionalFields");
+      var detailButton = document.querySelector("button:nth-of-type(1)");
+      if (additionalFields.style.display === "none") {
+        additionalFields.style.display = "block";
+        detailButton.style.display = "none";
+      } else {
+        additionalFields.style.display = "none";
+        detailButton.style.display = "block";
+      }
+    }
+    
+    function calculateSalary() {
+      var osnovica = parseFloat(document.getElementById("osnovica").value);
+      var koeficijent = parseFloat(document.getElementById("koeficijent").value);
+      var minuliRad = parseFloat(document.getElementById("minuli-rad").value);
+    
+      var licniOdbitak = parseFloat(document.getElementById("licni-odbitak").value);
+      var brojSati = parseFloat(document.getElementById("broj-sati").value);
+      
+      var redovanRad = parseFloat(document.getElementById("redovan-radd").value) || 0;
+      var nocniRad = parseFloat(document.getElementById("nocni-rad").value) || 0;
+      var radZaPraznike = parseFloat(document.getElementById("rad-za-praznike").value) || 0;
+      var placenoOdsustvo = parseFloat(document.getElementById("placeno-odsustvo").value) || 0;
+      var bolovanjeDo30 = parseFloat(document.getElementById("bolovanje-do-30").value) || 0;
+      var bolovanjePreko30 = parseFloat(document.getElementById("bolovanje-preko-30").value) || 0;
+      
       var osnovnaBrutoPlata = koeficijent * osnovica;
       var radniStaz = osnovnaBrutoPlata * minuliRad;
       var cijenaRadnogSata = osnovnaBrutoPlata / brojSati;
       var iznosRedovnogRada = (redovanRad + placenoOdsustvo) * cijenaRadnogSata;
-      var iznosNocnogRada = nocniRad * cijenaRadnogSata * 1.35;
-      var iznosPraznicnogRada = radZaPraznike * cijenaRadnogSata * 1.5;
-      var iznosBolovanjaDo30 = bolovanjeDo30 * cijenaRadnogSata * 0.8;
-      var iznosBolovanjaPreko30 = bolovanjePreko30 * cijenaRadnogSata * 0.85;
-      var brutoPlata = iznosRedovnogRada + iznosNocnogRada + iznosPraznicnogRada + iznosBolovanjaDo30 + iznosBolovanjaPreko30 + radniStaz;
+      var iznosNocnogRada = redovanRad * cijenaRadnogSata * 1.35;
+      var iznosPraznicnogRada = redovanRad * cijenaRadnogSata * 1.5;
+      var iznosBolovanjaDo30 = redovanRad * cijenaRadnogSata * 0.8;
+      var iznosBolovanjaPreko30 = redovanRad * cijenaRadnogSata * 0.85;
+      var brutoPlata = iznosRedovnogRada + iznosNocnogRada + iznosPraznicnogRada + iznosBolovanjaDo30 + iznosBolovanjaPreko30;
       var ukupniDoprinosi = osnovnaBrutoPlata * 0.31;
       var ukupniPorez = (brutoPlata - poreskoOslobodjenje - licniOdbitak) * 0.08;
       var netoPlata = brutoPlata - ukupniDoprinosi - ukupniPorez;
-
-      // Ispis rezultata u tabeli
-      var table = document.getElementById('result-table');
-      var row = table.insertRow();
-
-      row.insertCell().textContent = osnovnaBrutoPlata.toFixed(2);
-      row.insertCell().textContent = radniStaz.toFixed(2);
-      row.insertCell().textContent = cijenaRadnogSata.toFixed(2);
-      row.insertCell().textContent = iznosRedovnogRada.toFixed(2);
-      row.insertCell().textContent = iznosNocnogRada.toFixed(2);
-      row.insertCell().textContent = iznosPraznicnogRada.toFixed(2);
-      row.insertCell().textContent = iznosBolovanjaDo30.toFixed(2);
-      row.insertCell().textContent = iznosBolovanjaPreko30.toFixed(2);
-      row.insertCell().textContent = brutoPlata.toFixed(2);
-      row.insertCell().textContent = ukupniDoprinosi.toFixed(2);
-      row.insertCell().textContent = ukupniPorez.toFixed(2);
-      row.insertCell().textContent = netoPlata.toFixed(2);
-
-      // Resetovanje forme
-      document.getElementById('salary-form').reset();
-    });
+      
+      var table = document.getElementById("salaryTable");
+      table.style.display = "block";
+      
+      var tbody = table.querySelector("tbody");
+      if (tbody === null) {
+        tbody = document.createElement("tbody");
+        table.appendChild(tbody);
+      } else {
+        tbody.innerHTML = "";
+      }
+      
+      var rows = [
+        { label: "Osnovna bruto plata", value: osnovnaBrutoPlata },
+        { label: "Radni staž", value: radniStaz },
+        { label: "Cijena radnog sata", value: cijenaRadnogSata },
+        { label: "Iznos redovnog rada", value: iznosRedovnogRada },
+        { label: "Iznos noćnog rada", value: iznosNocnogRada },
+        { label: "Iznos prazničnog rada", value: iznosPraznicnogRada },
+        { label: "Iznos bolovanja do 30 dana", value: iznosBolovanjaDo30 },
+        { label: "Iznos bolovanja preko 30 dana", value: iznosBolovanjaPreko30 },
+        { label: "Bruto plata", value: brutoPlata },
+        { label: "Ukupni doprinosi", value: ukupniDoprinosi },
+        { label: "Ukupni porez", value: ukupniPorez },
+        { label: "Neto plata", value: netoPlata }
+      ];
+      
+      rows.forEach(function(row) {
+        var tr = document.createElement("tr");
+        var th = document.createElement("th");
+        th.textContent = row.label;
+        var td = document.createElement("td");
+        td.textContent = row.value.toFixed(2);
+        tr.appendChild(th);
+        tr.appendChild(td);
+        tbody.appendChild(tr);
+      });
+    }
   </script>
 </body>
 </html>
