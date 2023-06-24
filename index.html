@@ -171,7 +171,8 @@
   var bolovanjePreko30 = parseFloat(document.getElementById("bolovanje-preko-30").value);
 
   // Provera da li suma broja sati odgovara unetim vrednostima
-  var sumaSati = redovanRad + nocniRad + radZaPraznike + placenoOdsustvo + bolovanjeDo30 + bolovanjePreko30;
+  // var sumaSati = redovanRad + nocniRad + radZaPraznike + placenoOdsustvo + bolovanjeDo30 + bolovanjePreko30;
+      var sumaSati = redovanRad;
   if (brojSati !== sumaSati) {
     alert("Greška: Suma broja sati ne odgovara unetim vrednostima.");
     return;
